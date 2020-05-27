@@ -1,14 +1,17 @@
 # Telephone-book
 contact book made by using node.js , express.js , EJS and css3
 
-
-To run this on local server -
-1. on terminal do 
-  npm init
-2. then do 
-  npm install express
-3. then 
-  npm install ejs
-4. then type 
-  node index.js
-5. open the browser and serch localhost:8000
+***
+To run this on local server 
+***
+1.) Install packages using below command.  
+```
+npm init 
+npm install express
+npm install ejs
+```
+2.) Then 
+```
+node index.js
+```
+3.) open the browser and serch localhost:8000
