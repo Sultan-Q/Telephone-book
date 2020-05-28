@@ -1,5 +1,9 @@
 const express = require('express'); //express module
 const port = 8000; //sets the local port number
+
+const db = require('./config/mongoose'); //database
+const Contact = require('./model/contact');
+
 const app = express();
 
 const path = require('path'); // path module
@@ -26,28 +30,50 @@ var contactList = [
 	}
 ];
 
-app.get('/', (req, res) =>
-	res.render('home', {
-		title: 'Home',
-		contact_list: contactList
-	})
-);
+app.get('/', (req, res) => {
+	Contact.find({}, (err, contacts) => {
+		if (err) {
+			console.log('error in fetching contacts from db');
+			return;
+		}
+		res.render('home', {
+			title: 'Home',
+			contact_list: contacts
+		});
+	});
+});
 
 //Adds data from the form to contactList array
 app.post('/add-contact', (req, res) => {
-	contactList.push(req.body);
-	return res.redirect('/');
+	// contactList.push(req.body);
+
+	Contact.create(
+		{
+			name: req.body.name,
+			phone: req.body.phone
+		},
+		(err, newContact) => {
+			if (err) {
+				console.log('error in creating DB');
+				return;
+			}
+			console.log('****', newContact);
+			return res.redirect('back');
+		}
+	);
 });
 
 //Delete a contact
 app.get('/delete-contact/', (req, res) => {
-	let phone = req.query.phone;
-	//confermes that the data to be deleted is in the array or not
-	let contactIndex = contactList.findIndex((contactList) => contactList.phone == phone);
+	let id = req.query.id;
 
-	if (contactIndex != -1) contactList.splice(contactIndex, 1);
-
-	return res.redirect('back');
+	Contact.findByIdAndDelete(id, (err) => {
+		if (err) {
+			console.log('error in deleting data from data base');
+			return;
+		}
+		return res.redirect('back');
+	});
 });
 
 app.listen(port, (err) => {
