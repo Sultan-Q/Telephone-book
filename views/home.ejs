@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/home.css">
 </head>
 <body>
-    <h1>My Contacts</h1>
+      <h1>My Contacts</h1>
     <%for (let i of contact_list) {%>
         <div class="container">
             <div class="part-1">
@@ -22,7 +22,7 @@
                     Phone: <%= i.phone%>
                 </span>
             </div>  
-            <a href="/delete-contact/?phone=<%=i.phone%>">
+            <a href="/delete-contact/?id=<%=i.id%>">
                 <i class="fas fa-minus-circle delete"></i>
             </a>  
         </div>
