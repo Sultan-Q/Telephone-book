@@ -15,20 +15,7 @@ app.use(express.urlencoded()); //for reading forms data
 
 app.use(express.static('assets')); // static fils
 
-var contactList = [
-	{
-		name: 'Swapnil',
-		phone: '123'
-	},
-	{
-		name: 'Archis',
-		phone: '456'
-	},
-	{
-		name: 'Afro',
-		phone: '789'
-	}
-];
+
 
 app.get('/', (req, res) => {
 	Contact.find({}, (err, contacts) => {
