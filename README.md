@@ -11,7 +11,14 @@ To run this on local server
 npm init 
 npm install express
 npm install ejs
+npm install mongoose
 ```
+OR the following:
+```
+npm init -y
+npm install express ejs mongoose
+```
+
 3.) Then 
 ```
 node index.js
